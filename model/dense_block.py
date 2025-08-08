@@ -15,20 +15,13 @@ class DenseBlock(tf.keras.Model):
         self.conv2_layers = []
         self.dropout2_layers = []
 
-        self.bn1 = tf.keras.layers.BatchNormalization()
-        self.conv1 = tf.keras.layers.Conv2D(filters=4*self.k, kernel_size=(1,1), strides=(1,1), padding='same', activation='relu')
-        self.dropout1 = tf.keras.layers.Dropout(rate=0.2)
-        self.bn2 = tf.keras.layers.BatchNormalization()
-        self.conv2 = tf.keras.layers.Conv2D(filters=self.k, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu')
-        self.dropout2 = tf.keras.layers.Dropout(rate=0.2)
-
         for _ in range(num_layers):
-            self.bn1_layers.append(self.bn1)
-            self.conv1_layers.append(self.conv1)
-            self.dropout1_layers.append(self.dropout1)
-            self.bn2_layers.append(self.bn2)
-            self.conv2_layers.append(self.conv2)
-            self.dropout2_layers.append(self.dropout2)
+            self.bn1_layers.append(tf.keras.layers.BatchNormalization())
+            self.conv1_layers.append(tf.keras.layers.Conv2D(filters=4*self.k, kernel_size=(1,1), strides=(1,1), padding='same', activation='relu'))
+            self.dropout1_layers.append(tf.keras.layers.Dropout(rate=0.2))
+            self.bn2_layers.append(tf.keras.layers.BatchNormalization())
+            self.conv2_layers.append(tf.keras.layers.Conv2D(filters=self.k, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu'))
+            self.dropout2_layers.append(tf.keras.layers.Dropout(rate=0.2))
 
     def call(self, inputs, training=False):
         features = [inputs]
