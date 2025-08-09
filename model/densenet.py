@@ -29,9 +29,9 @@ class DenseNet(tf.keras.Model):
 
 
     def call(self, x, training=False):
-        x = self.bn(x)
+        x = self.bn1(x)
         x = self.conv(x)
-        x = self.relu(x)
+        x = self.relu1(x)
         x = self.maxpool(x)
 
         x = self.dense_block1(x, training)
