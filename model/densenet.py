@@ -1,6 +1,6 @@
 import tensorflow as tf
-from dense_block import DenseBlock
-from transition_layer import TransitionLayer
+from model.dense_block import DenseBlock
+from model.transition_layer import TransitionLayer
 
 class DenseNet(tf.keras.Model):
     def __init__(self, num_classes=2, growth_rate=32, compression=0.5):
@@ -24,7 +24,7 @@ class DenseNet(tf.keras.Model):
         self.relu2 = tf.keras.layers.Activation('relu')
 
         self.globalavgpool = tf.keras.layers.GlobalAveragePooling2D()
-        self.fc = tf.keras.layers.Dense(1000, activation='softmax')
+        self.fc = tf.keras.layers.Dense(1000, activation='softmax', kernel_regularizer=tf.keras.regularizers.l2(1e-4))
 
 
 
@@ -34,13 +34,13 @@ class DenseNet(tf.keras.Model):
         x = self.relu1(x)
         x = self.maxpool(x)
 
-        x = self.dense_block1(x, training)
-        x = self.trans1(x, training)
-        x = self.dense_block2(x, training)
-        x = self.trans2(x, training)
-        x = self.dense_block3(x, training)
-        x = self.trans3(x, training)
-        x = self.dense_block4(x, training)
+        x = self.dense_block1(x, training=training)
+        x = self.trans1(x, training=training)
+        x = self.dense_block2(x, training=training)
+        x = self.trans2(x, training=training)
+        x = self.dense_block3(x, training=training)
+        x = self.trans3(x, training=training)
+        x = self.dense_block4(x, training=training)
 
         x = self.bn2(x)
         x = self.relu2(x)

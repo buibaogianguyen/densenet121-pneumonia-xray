@@ -14,7 +14,7 @@ class TransitionLayer(tf.keras.layers.Layer):
         self.conv = tf.keras.layers.Conv2D(filters=filters, kernel_size=(1,1), padding='same', use_bias=False)
 
     def call(self, x, training=False):
-        x = self.bn(x, training)
+        x = self.bn(x, training=training)
         x = self.relu(x)
         x = self.conv(x)
         x = self.avgpool(x)
