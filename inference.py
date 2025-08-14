@@ -24,6 +24,21 @@ def preprocess(img_path, img_shape=(224,224)):
     prep_img = preprocessor(img)
     prep_img = tf.expand_dims(prep_img, axis=0)
 
-
+    return prep_img
 
 def inference(input_path, model_path='best_model.h5'):
+    model = load_best_model()
+
+    processed_img = preprocess(input_path)
+
+    prediction = model(processed_img, training=False)
+
+    probabilities = tf.nn.softmax(prediction).numpy()[0]
+
+    print(probabilities)
+
+if __name__ == '__main__':
+    input_path = '' # input path of image to run inference with
+    model_path='best_model.h5'
+
+    inference(input_path, model_path)
