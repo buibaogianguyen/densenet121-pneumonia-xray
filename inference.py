@@ -14,4 +14,13 @@ def load_best_model(model_path='best_model.h5'):
     
     return model
 
+def preprocess(img_path, img_shape=(224,224)):
+    preprocessor = Preprocessor(img_shape=img_shape, augment=False)
+    
+    img = tf.io.read_file(img_path)
+    img = tf.image.decode_image(img, channels=3)
+    img = tf.cast(img, tf.float32)
+
+
+
 def inference(input_path, model_path='best_model.h5'):
