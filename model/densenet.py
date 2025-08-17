@@ -24,7 +24,7 @@ class DenseNet(tf.keras.Model):
         self.relu2 = tf.keras.layers.Activation('relu')
 
         self.globalavgpool = tf.keras.layers.GlobalAveragePooling2D()
-        self.fc = tf.keras.layers.Dense(1000, activation='softmax', kernel_regularizer=tf.keras.regularizers.l2(1e-4))
+        self.fc = tf.keras.layers.Dense(2, activation='softmax', kernel_regularizer=tf.keras.regularizers.l2(1e-4))
 
 
 
