@@ -35,7 +35,7 @@ if __name__ == '__main__':
     train_loader = load_data(root, split='train', augment=True)
     val_loader = load_data(root, split='test', augment=False)
 
-    model.compile(optimizer = tf.keras.optimizers.AdamW(learning_rate=1e-4),
+    model.compile(optimizer = tf.keras.optimizers.AdamW(learning_rate=0.001),
                   loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
                   metrics = ['accuracy']
 
